@@ -39,7 +39,7 @@ export default Vue.extend({
       valid: false,
       isRoading: false,
       accountRules: [(v: any) => !!v || "Account is required"],
-      passwordRules: [(v: any) => !!v || "Password is required"],
+      passwordRules: [(v: any) => !!v || "Password is required"]
     };
   },
   methods: {
@@ -49,14 +49,14 @@ export default Vue.extend({
         store.auth
           .loginByAdmin({
             account: this.account,
-            password: this.password,
+            password: this.password
           })
-          .then((res) => {
+          .then(res => {
             this.isRoading = false;
           });
       }
-    },
-  },
+    }
+  }
 });
 </script>
 

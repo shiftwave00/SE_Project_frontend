@@ -11,8 +11,8 @@ import NavBar from "@/components/NavBar.vue";
 
 export default Vue.extend({
   components: {
-    NavBar,
-  },
+    NavBar
+  }
 });
 </script>
 
@@ -38,7 +38,7 @@ export default Vue.extend({
   }
 }
 
-.routercolor{
-  color:  rgb(255,255,255)!important
+.routercolor {
+  color: rgb(255, 255, 255) !important;
 }
 </style>

@@ -108,32 +108,32 @@ export default Vue.extend({
         {
           text: "Account (Id)",
           align: "start",
-          value: "account",
+          value: "account"
         },
         { text: "Name", value: "name" },
         { text: "AvatarUrl", value: "avatarUrl" },
         { text: "Authority", value: "authority" },
-        { text: "Actions", value: "actions", sortable: false },
+        { text: "Actions", value: "actions", sortable: false }
       ],
       editedIndex: -1,
       deleteUserName: "",
       editedItem: {
         name: "",
         avatarUrl: "",
-        authority: "",
+        authority: ""
       },
       defaultItem: {
         name: "",
         avatarUrl: "",
-        authority: "",
-      },
+        authority: ""
+      }
     };
   },
 
   computed: {
     formTitle(): string {
       return this.editedIndex === -1 ? "New User" : "Edit User";
-    },
+    }
   },
   watch: {
     dialog(val) {
@@ -141,7 +141,7 @@ export default Vue.extend({
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    },
+    }
   },
   methods: {
     filter(value: any, search: string, item: any) {
@@ -193,21 +193,21 @@ export default Vue.extend({
         newInfo.push({
           value: editedItem.name,
           path: "/name",
-          op: "replace",
+          op: "replace"
         });
       }
       if (user.avatarUrl !== editedItem.avatarUrl) {
         newInfo.push({
           value: editedItem.avatarUrl,
           path: "/avatarUrl",
-          op: "replace",
+          op: "replace"
         });
       }
       if (user.authority !== editedItem.authority) {
         newInfo.push({
           value: editedItem.authority,
           path: "/authority",
-          op: "replace",
+          op: "replace"
         });
       }
       return newInfo;
@@ -218,13 +218,13 @@ export default Vue.extend({
         const newInfo = this.findDifferent(user, this.editedItem);
         Object.assign(this.users[this.editedIndex], this.editedItem);
         editUserInfo(user.account, newInfo)
-          .then((response) => {
+          .then(response => {
             if (response.data.success) {
               this.$emit("showMessage", response.data);
               this.$emit("update");
             }
           })
-          .catch((err) => {
+          .catch(err => {
             this.$emit("showMessage", err);
             this.$emit("update");
           });
@@ -232,10 +232,9 @@ export default Vue.extend({
         this.users.push(this.editedItem);
       }
       this.close();
-    },
-  },
+    }
+  }
 });
 </script>
 
-<style>
-</style>
+<style></style>

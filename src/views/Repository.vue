@@ -126,7 +126,7 @@ export default Vue.extend({
     NewItem,
     TableSearch,
     InviteUser,
-    ProjectMemberTable,
+    ProjectMemberTable
   },
   data() {
     return {
@@ -134,12 +134,12 @@ export default Vue.extend({
       headers: [
         {
           text: "RepositoryName",
-          value: "name",
+          value: "name"
         },
         {
           text: "action",
-          value: "action",
-        },
+          value: "action"
+        }
       ],
       user: { type: Object, id: "" },
       repositories: [{ type: Object, id: "", name: "", test: "" }],
@@ -158,13 +158,15 @@ export default Vue.extend({
       userAccounts: [],
       searchbarLength: 7,
       dialogDelete: false,
-      wantToDeleteRepoId: -1,
+      wantToDeleteRepoId: -1
     };
   },
   async created() {
     this.user = (await getUserInfo())["data"];
     this.repositories = (await getRepository(this.projectId))["data"];
-    this.isOwner = (await isCurrentUserProjectOwner(this.projectId))["data"].success;
+    this.isOwner = (await isCurrentUserProjectOwner(this.projectId))[
+      "data"
+    ].success;
     await this.getProjectInfo();
     await this.getProjectMemberWithutOwner();
     if (!this.isOwner) this.searchbarLength = 10;
@@ -174,7 +176,7 @@ export default Vue.extend({
       const result = await getProjectMember(Number(this.projectId));
       this.projectMember = result["data"];
       this.projectMember = this.projectMember.filter(
-        (item) => item.id != this.projectOwnerId
+        item => item.id != this.projectOwnerId
       );
     },
     async goToRepoInfo(repoId: any) {
@@ -190,8 +192,21 @@ export default Vue.extend({
       this.snackBarColor = result["data"].success ? "green" : "red";
       await this.getProjectName();
     },
-    async add(url: any,isSonarqube: boolean,sonarqubeUrl: string,accountColonPw: string,projectKey: string) {
-      const result = await addRepo(Number(this.projectId),url,isSonarqube,sonarqubeUrl,accountColonPw,projectKey);
+    async add(
+      url: any,
+      isSonarqube: boolean,
+      sonarqubeUrl: string,
+      accountColonPassword: string,
+      projectKey: string
+    ) {
+      const result = await addRepo(
+        Number(this.projectId),
+        url,
+        isSonarqube,
+        sonarqubeUrl,
+        accountColonPassword,
+        projectKey
+      );
       this.msg = result["data"].message;
       this.dialog = false;
       this.snackBar = true;
@@ -202,7 +217,9 @@ export default Vue.extend({
       this.repositories = (await getRepository(this.projectId))["data"];
     },
     async getProjectName() {
-      this.projectName = (await getProject(Number(this.projectId)))["data"].name;
+      this.projectName = (await getProject(Number(this.projectId)))[
+        "data"
+      ].name;
     },
     async getProjectInfo() {
       const result = (await getProject(Number(this.projectId)))["data"];
@@ -242,11 +259,11 @@ export default Vue.extend({
       this.snackBarColor = result["data"].success ? "green" : "red";
     },
     async clickInvatation(projectId: number) {
-      invite(Number(this.projectId)).then((res) => {
+      invite(Number(this.projectId)).then(res => {
         this.userAccounts = res.data;
       });
-    },
-  },
+    }
+  }
 });
 </script>
 <style></style>

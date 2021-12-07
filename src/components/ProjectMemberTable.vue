@@ -10,10 +10,7 @@
           <v-btn color="blue darken-1" text @click="closeDialogDelete"
             >Cancel</v-btn
           >
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="deleteProjectMember()"
+          <v-btn color="blue darken-1" text @click="deleteProjectMember()"
             >Delete</v-btn
           >
           <v-spacer></v-spacer>
@@ -21,7 +18,9 @@
       </v-card>
     </v-dialog>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="success" v-bind="attrs" v-on="on"><v-icon>mdi-account-multiple</v-icon></v-btn>
+      <v-btn color="success" v-bind="attrs" v-on="on"
+        ><v-icon>mdi-account-multiple</v-icon></v-btn
+      >
     </template>
     <v-card>
       <v-card-title>
@@ -33,7 +32,10 @@
             <v-toolbar-title>Owner: {{ projectOwnerName }}</v-toolbar-title>
           </v-toolbar>
         </template>
-        <template v-if="isProjectOwner(currentUserId)" v-slot:[`item.actions`]="{ item }">
+        <template
+          v-if="isProjectOwner(currentUserId)"
+          v-slot:[`item.actions`]="{ item }"
+        >
           <v-icon
             small
             :disabled="!isProjectOwner(currentUserId)"
@@ -45,21 +47,26 @@
       </v-data-table>
     </v-card>
     <v-snackbar
-        v-model="snackBar"
-        :timeout="snackBarTimeout"
-        :color="snackBarColor"
-      >
-        {{ msg }}
-      </v-snackbar>
+      v-model="snackBar"
+      :timeout="snackBarTimeout"
+      :color="snackBarColor"
+    >
+      {{ msg }}
+    </v-snackbar>
   </v-dialog>
 </template>
-
 
 <script lang="ts">
 import Vue from "vue";
 import { deleteProjectMember, getProjectMember } from "@/apis/projects";
 export default Vue.extend({
-  props: ["projectOwnerId", "projectOwnerName", "projectId", "currentUserId", "tableData"],
+  props: [
+    "projectOwnerId",
+    "projectOwnerName",
+    "projectId",
+    "currentUserId",
+    "tableData"
+  ],
   data() {
     return {
       dialog: false,
@@ -72,39 +79,41 @@ export default Vue.extend({
       headers: [
         {
           text: "Name",
-          value: "name",
+          value: "name"
         },
         {
           text: "Actions",
-          value: "actions",
-        },
-      ],
+          value: "actions"
+        }
+      ]
     };
   },
   methods: {
     async deleteProjectMember() {
-      const reponse = (await deleteProjectMember(this.projectId, this.deletedUserId))["data"]
-      this.closeDialogDelete()
-      this.msg = reponse.message
-      this.snackBar = true
-      this.snackBarColor = reponse.success ? "green" : "red"
+      const reponse = (
+        await deleteProjectMember(this.projectId, this.deletedUserId)
+      )["data"];
+      this.closeDialogDelete();
+      this.msg = reponse.message;
+      this.snackBar = true;
+      this.snackBarColor = reponse.success ? "green" : "red";
 
-      this.$emit("deleteProjectMember")
+      this.$emit("deleteProjectMember");
     },
 
     showRemoveProjectMemberDialog(userId: string) {
-      this.dialogDelete = true
-      this.deletedUserId = userId
+      this.dialogDelete = true;
+      this.deletedUserId = userId;
     },
 
     closeDialogDelete() {
-      this.dialogDelete = false
-      this.deletedUserId = ""
+      this.dialogDelete = false;
+      this.deletedUserId = "";
     },
 
     isProjectOwner(userAccount: string) {
-      return userAccount == this.projectOwnerId
-    },
-  },
+      return userAccount == this.projectOwnerId;
+    }
+  }
 });
 </script>

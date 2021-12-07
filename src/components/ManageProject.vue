@@ -82,7 +82,7 @@ import Vue from "vue";
 import {
   getProjects,
   editProjectNameByAdmin,
-  deleteProjectByAdmin,
+  deleteProjectByAdmin
 } from "@/apis/projects.ts";
 
 export default Vue.extend({
@@ -96,26 +96,26 @@ export default Vue.extend({
         {
           text: "Id",
           align: "start",
-          value: "id",
+          value: "id"
         },
         { text: "Name", value: "name" },
         { text: "Owner", value: "ownerName" },
         { text: "Members", value: "members" },
-        { text: "Actions", value: "actions", sortable: false },
+        { text: "Actions", value: "actions", sortable: false }
       ],
       editedIndex: -1,
       editedItem: {
-        name: "",
+        name: ""
       },
       defaultItem: {
-        name: "",
-      },
+        name: ""
+      }
     };
   },
   computed: {
     formTitle(): string {
       return this.editedIndex === -1 ? "New Project" : "Edit Project";
-    },
+    }
   },
   watch: {
     dialog(val) {
@@ -123,7 +123,7 @@ export default Vue.extend({
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    },
+    }
   },
   methods: {
     editItem(item: any) {
@@ -170,19 +170,19 @@ export default Vue.extend({
           {
             value: this.editedItem.name,
             path: "/name",
-            op: "replace",
-          },
+            op: "replace"
+          }
         ];
         Object.assign(this.projects[this.editedIndex], this.editedItem);
         const project = this.projects[this.editedIndex];
         editProjectNameByAdmin(project.id, newProjectInfo)
-          .then((response) => {
+          .then(response => {
             if (response.data.success) {
               this.$emit("showMessage", response.data);
               this.$emit("update");
             }
           })
-          .catch((err) => {
+          .catch(err => {
             this.$emit("showMessage", err);
             this.$emit("update");
           });
@@ -190,10 +190,9 @@ export default Vue.extend({
         this.projects.push(this.editedItem);
       }
       this.close();
-    },
-  },
+    }
+  }
 });
 </script>
 
-<style>
-</style>
+<style></style>

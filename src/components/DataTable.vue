@@ -9,16 +9,20 @@
   >
     <template v-slot:default="props">
       <v-dialog v-model="dialogDelete" max-width="30%">
-            <v-card>
-              <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="removeProject">OK</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+        <v-card>
+          <v-card-title class="headline"
+            >Are you sure you want to delete?</v-card-title
+          >
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="closeDelete"
+              >Cancel</v-btn
+            >
+            <v-btn color="blue darken-1" text @click="removeProject">OK</v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-row>
         <v-col
           v-for="item in props.items"
@@ -68,21 +72,21 @@ export default Vue.extend({
       headers: [
         {
           text: "ProjectName",
-          value: "name",
+          value: "name"
         },
         {
           text: "Actions",
-          value: "actions",
-        },
+          value: "actions"
+        }
       ],
       dialogDelete: false,
       deleteUserId: "",
-      deleteProjectId: "",
+      deleteProjectId: ""
     };
   },
   methods: {
     goToRepositoryDetail(id: string, projectName: string) {
-      this.$router.push({name: "Repository", params: {projectId: id}});
+      this.$router.push({ name: "Repository", params: { projectId: id } });
     },
 
     isDeleteProjectEnable(userId: string, owner: string) {
@@ -102,7 +106,7 @@ export default Vue.extend({
     removeProject() {
       this.$emit("deleteProject", this.deleteProjectId, this.deleteUserId);
       this.dialogDelete = false;
-    },
+    }
   }
 });
 </script>

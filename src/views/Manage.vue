@@ -8,19 +8,29 @@
           </v-tab>
 
           <v-tabs-items v-model="tab" class="tab-item">
-            <v-tab-item><ManageAccount :users="users" @showMessage="showMessage" @update="update"/></v-tab-item>
-            <v-tab-item><ManageProject :projects=projects @showMessage="showMessage" @update="update"/></v-tab-item>
+            <v-tab-item
+              ><ManageAccount
+                :users="users"
+                @showMessage="showMessage"
+                @update="update"
+            /></v-tab-item>
+            <v-tab-item
+              ><ManageProject
+                :projects="projects"
+                @showMessage="showMessage"
+                @update="update"
+            /></v-tab-item>
           </v-tabs-items>
         </v-tabs>
       </v-col>
     </v-row>
-        <v-snackbar
-        v-model="snackBar"
-        :timeout="snackBarTimeout"
-        :color="snackBarColor"
-      >
-        {{ message }}
-      </v-snackbar>
+    <v-snackbar
+      v-model="snackBar"
+      :timeout="snackBarTimeout"
+      :color="snackBarColor"
+    >
+      {{ message }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -42,24 +52,24 @@ export default Vue.extend({
       message: "",
       snackBar: false,
       snackBarTimeout: 3000,
-      snackBarColor: "",
+      snackBarColor: ""
     };
   },
   methods: {
-    async initialize(){
-      this.projects = (await getProjectByAdmin())['data']
-      this.users = (await getAllUser())['data']
+    async initialize() {
+      this.projects = (await getProjectByAdmin())["data"];
+      this.users = (await getAllUser())["data"];
     },
     showMessage(response: any) {
       this.snackBarColor = response.success ? "green" : "red";
-      this.message = response.message
-      this.snackBar = true
+      this.message = response.message;
+      this.snackBar = true;
       if (response.success) {
-        this.update()
+        this.update();
       }
     },
     update() {
-      this.initialize()
+      this.initialize();
     }
   },
   components: {
@@ -67,10 +77,9 @@ export default Vue.extend({
     ManageProject
   },
   created() {
-    this.initialize()
+    this.initialize();
   }
 });
 </script>
 
-<style>
-</style>
+<style></style>

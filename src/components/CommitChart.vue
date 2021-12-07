@@ -29,26 +29,26 @@ const initialData = () => {
     commitData: {},
     selectedWeek: "",
     chartSetting: {
-      selectedMode: "single",
-    },
+      selectedMode: "single"
+    }
   };
 };
 
 export default Vue.extend({
   props: {
     repoId: Number,
-    compareRepoId: Number,
+    compareRepoId: Number
   },
   watch: {
-    compareRepoId: function (newValue) {
+    compareRepoId: function(newValue) {
       this.getCompareCommitInfoData();
-    },
+    }
   },
-  data: function () {
+  data: function() {
     return initialData();
   },
   mounted() {
-    this.getCommitInfoData(this.repoId).then((res) => {
+    this.getCommitInfoData(this.repoId).then(res => {
       this.weekTotalData = res.weekTotalData;
       this.dayOfWeekData = res.dayOfWeekData;
       this.selectedWeek =
@@ -62,33 +62,33 @@ export default Vue.extend({
       return {
         click: (e: any) => {
           this.clickChartEvent(e);
-        },
+        }
       };
     },
     isCompare(): boolean {
       return this.compareRepoId != null;
-    },
+    }
   },
   methods: {
     getCommitInfoData(repoId: number): Promise<any> {
       return getCommitInfo(repoId)
-        .then((res) => {
+        .then(res => {
           const data = res.data;
           return {
             weekTotalData: {
               columns: ["week", "total"],
-              rows: data.weekTotalData,
+              rows: data.weekTotalData
             },
-            dayOfWeekData: data.dayOfWeekData,
+            dayOfWeekData: data.dayOfWeekData
           };
         })
-        .catch((err) => {
+        .catch(err => {
           router.push("/notfound");
         });
     },
     getCompareCommitInfoData() {
       if (this.isCompare) {
-        this.getCommitInfoData(this.compareRepoId).then((res) => {
+        this.getCommitInfoData(this.compareRepoId).then(res => {
           this.compareWeekTotalData = res.weekTotalData;
         });
       }
@@ -96,7 +96,7 @@ export default Vue.extend({
     setCommitData() {
       this.commitData = {
         columns: ["day", "commit"],
-        rows: this.getCommitRowsData(),
+        rows: this.getCommitRowsData()
       };
     },
     clickChartEvent(e: any) {
@@ -116,7 +116,7 @@ export default Vue.extend({
         }
       );
       return rows;
-    },
-  },
+    }
+  }
 });
 </script>

@@ -2,8 +2,8 @@
   <v-card max-width="374" height="700" class="pt-5">
     <v-card-text>
       <v-avatar size="192">
-      <img class="mb-2" height="250" contain :src="avatarUrl">
-    </v-avatar>
+        <img class="mb-2" height="250" contain :src="avatarUrl" />
+      </v-avatar>
       <v-col md="12"
         ><v-row class="d-flex justify-center">
           <v-edit-dialog :return-value.sync="userName" @save="save">
@@ -28,23 +28,23 @@ import Vue from "vue";
 export default Vue.extend({
   props: {
     name: { type: String },
-    avatarUrl: { type: String },
+    avatarUrl: { type: String }
   },
   data() {
     return {
       userName: this.name,
-      max25chars: function (v: any) {
+      max25chars: function(v: any) {
         return v.length <= 25 || "Input too long!";
-      },
+      }
     };
   },
   methods: {
-    save(){
+    save() {
       this.$emit("save", this.userName);
     }
   },
   watch: {
-    name(newVal){
+    name(newVal) {
       this.userName = newVal;
     }
   }

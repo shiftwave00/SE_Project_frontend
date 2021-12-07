@@ -4,9 +4,9 @@
       <!-- 左邊個人資訊 -->
       <v-col lg="2">
         <UserInfo
-        :avatarUrl=user.avatarUrl
-        :name=user.name
-        @save="saveUserName($event)"
+          :avatarUrl="user.avatarUrl"
+          :name="user.name"
+          @save="saveUserName($event)"
         />
       </v-col>
       <!-- 左邊個人資訊 end -->
@@ -31,7 +31,12 @@
         <v-divider></v-divider>
         <v-row>
           <v-col lg="12">
-            <DataTable :searchedName="searchedName" :tableData="projects" :user="user" @deleteProject="removeProject" />
+            <DataTable
+              :searchedName="searchedName"
+              :tableData="projects"
+              :user="user"
+              @deleteProject="removeProject"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -54,15 +59,15 @@ import UserInfo from "@/components/UserInfo.vue";
 import DataTable from "@/components/DataTable.vue";
 import NewItem from "@/components/NewItem.vue";
 import TableSearch from "@/components/TableSearch.vue";
-import { getUserInfo, editUserName } from "@/apis/user"
-import bus from '@/store/modules/bus'
+import { getUserInfo, editUserName } from "@/apis/user";
+import bus from "@/store/modules/bus";
 
 export default Vue.extend({
   components: {
     UserInfo,
     DataTable,
     NewItem,
-    TableSearch,
+    TableSearch
   },
   data() {
     return {
@@ -73,17 +78,17 @@ export default Vue.extend({
       snackBar: false,
       snackBarTimeout: 3000,
       snackBarColor: "",
-      user: {type: Object, id: '', name: '', avatarUrl: ''}
+      user: { type: Object, id: "", name: "", avatarUrl: "" }
     };
   },
-  async created(){
-    this.updateProject()
+  async created() {
+    this.updateProject();
     this.user = (await getUserInfo())["data"];
-    bus.on('updateProject', this.updateProject)
+    bus.on("updateProject", this.updateProject);
   },
   methods: {
     async updateProject() {
-      this.projects = (await getProjects())["data"]
+      this.projects = (await getProjects())["data"];
     },
 
     async saveUserName(newUserName: string) {
@@ -111,7 +116,7 @@ export default Vue.extend({
     },
 
     async removeProject(projectId: any, userId: any) {
-      const result = (await deleteProject(projectId, userId))
+      const result = await deleteProject(projectId, userId);
 
       this.msg = result["data"].message;
       this.dialog = false;
@@ -119,8 +124,8 @@ export default Vue.extend({
       this.snackBarColor = result["data"].success ? "green" : "red";
 
       this.projects = (await getProjects(this.user.id))["data"];
-    },
-  },
+    }
+  }
 });
 </script>
 

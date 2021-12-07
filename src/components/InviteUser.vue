@@ -69,7 +69,7 @@ export default Vue.extend({
   data() {
     return {
       inputData: "",
-      dialog: false,
+      dialog: false
     };
   },
   methods: {
@@ -80,7 +80,7 @@ export default Vue.extend({
     clearInputData() {
       this.$emit("clickInvitation", this.inputData);
       this.inputData = "";
-    },
-  },
+    }
+  }
 });
 </script>

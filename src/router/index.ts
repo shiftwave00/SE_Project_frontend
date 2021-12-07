@@ -1,21 +1,27 @@
 import Vue from "vue";
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from "vue-router";
-import Login from "@/views/Login.vue"
-import AdminLogin from '@/views/AdminLogin.vue'
-import Project from "@/views/Project.vue"
-import Repository from "@/views/Repository.vue"
-import GithubAuthorize from "@/components/GithubAuthorize.vue"
-import RepoInfo from '@/views/RepoInfo.vue'
-import NotFound from '@/views/NotFound.vue'
-import store from '@/store';
-import Manage from '@/views/Manage.vue'
+import Login from "@/views/Login.vue";
+import AdminLogin from "@/views/AdminLogin.vue";
+import Project from "@/views/Project.vue";
+import Repository from "@/views/Repository.vue";
+import GithubAuthorize from "@/components/GithubAuthorize.vue";
+import RepoInfo from "@/views/RepoInfo.vue";
+import NotFound from "@/views/NotFound.vue";
+import store from "@/store";
+import Manage from "@/views/Manage.vue";
 Vue.use(VueRouter);
 
-const checkAuth = (isNeedAuth: boolean, isNotMatchTo: string, next: NavigationGuardNext<Vue>) => {
-  const isMatch = isNeedAuth ? store.auth.isAuthenticated : !store.auth.isAuthenticated;
-  if (isMatch) next()
-  else next({ name: isNotMatchTo })
-}
+const checkAuth = (
+  isNeedAuth: boolean,
+  isNotMatchTo: string,
+  next: NavigationGuardNext<Vue>
+) => {
+  const isMatch = isNeedAuth
+    ? store.auth.isAuthenticated
+    : !store.auth.isAuthenticated;
+  if (isMatch) next();
+  else next({ name: isNotMatchTo });
+};
 
 const routes: Array<RouteConfig> = [
   {
@@ -62,9 +68,9 @@ const routes: Array<RouteConfig> = [
     name: "Manage",
     component: Manage,
     beforeEnter: (to, from, next) => {
-      if(store.auth.isAuthenticated && store.auth.getAuthority == "Admin"){
+      if (store.auth.isAuthenticated && store.auth.getAuthority == "Admin") {
         next();
-      }else{
+      } else {
         next({ name: "Login" });
       }
     }

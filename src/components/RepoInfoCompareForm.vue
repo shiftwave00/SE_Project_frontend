@@ -40,13 +40,13 @@ export default Vue.extend({
       projects: [],
       repos: [],
       selectedProject: null,
-      selectedRepo: null,
+      selectedRepo: null
     };
   },
   watch: {
-    selectedRepo: function (newValue) {
+    selectedRepo: function(newValue) {
       this.$emit("change", { isCompare: this.isCompare, repoId: newValue });
-    },
+    }
   },
   created() {
     this.getprojects();
@@ -59,14 +59,17 @@ export default Vue.extend({
       if (!this.isCompare) {
         this.$emit("change", { isCompare: this.isCompare, repoId: null });
       } else {
-        this.$emit("change", { isCompare: this.isCompare, repoId: this.selectedRepo });
+        this.$emit("change", {
+          isCompare: this.isCompare,
+          repoId: this.selectedRepo
+        });
       }
     },
     changeProject(projectId: any) {
-      getRepository(projectId).then((res) => {
+      getRepository(projectId).then(res => {
         this.repos = res.data;
       });
-    },
-  },
+    }
+  }
 });
 </script>

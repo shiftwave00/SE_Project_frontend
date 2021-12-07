@@ -1,6 +1,6 @@
 <template>
-  <v-container fill-height fluid class="paper align-center justify-center" >
-    <div >
+  <v-container fill-height fluid class="paper align-center justify-center">
+    <div>
       <h1 class="title">Welcome to PMS</h1>
       <v-btn class="login-btn pa-2" @click="handleLogin">
         <v-icon>mdi-login-variant</v-icon>
@@ -21,8 +21,8 @@ export default Vue.extend({
   methods: {
     handleLogin: (e: any) => {
       window.location.assign(githubOAuthUrl);
-    },
-  },
+    }
+  }
 });
 </script>
 

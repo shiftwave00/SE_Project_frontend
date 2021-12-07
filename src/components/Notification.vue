@@ -58,7 +58,7 @@ import { getNotification, ReplyToInvitation } from "@/apis/notification.ts";
 import * as signalR from "@aspnet/signalr";
 import { host } from "../config/config";
 import store from "@/store";
-import bus from '@/store/modules/bus'
+import bus from "@/store/modules/bus";
 
 export default Vue.extend({
   data() {
@@ -76,16 +76,16 @@ export default Vue.extend({
   created() {
     this.connectHub();
     this.lisentNotification();
-    this.getNotificationData()
+    this.getNotificationData();
   },
 
-  beforeDestroy(){
+  beforeDestroy() {
     this.unsubscribeNotification();
   },
 
   methods: {
     getNotificationData() {
-      getNotification().then((res) => {
+      getNotification().then(res => {
         this.items = res.data;
         if (typeof this.items !== "undefined" && this.items.length > 0) {
           this.hasMessage = true;
@@ -94,14 +94,14 @@ export default Vue.extend({
         }
       });
     },
-    
+
     accept(item: any) {
       ReplyToInvitation(item.id, true).then(() => {
         this.getNotificationData();
-        bus.emit('updateProject')
+        bus.emit("updateProject");
       });
     },
-    
+
     reject(item: any) {
       ReplyToInvitation(item.id, false).then(() => {
         this.getNotificationData();
@@ -126,10 +126,9 @@ export default Vue.extend({
       this.hubConnection.on("ReceiveNotification", () => {
         this.getNotificationData();
       });
-    },
-  },
+    }
+  }
 });
 </script>
 
-<style>
-</style>
+<style></style>

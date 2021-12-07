@@ -5,7 +5,7 @@
     @input="ChangeInput"
     v-model="searchedName"
     prepend-inner-icon="mdi-magnify"
-    :label= "vTextLabel"
+    :label="vTextLabel"
     hide-details
     clearable
     outlined
@@ -15,19 +15,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 export default Vue.extend({
-  props: ['vTextLabel'],
-  data(){
-    return{
-      searchedName: "",
-    }
+  props: ["vTextLabel"],
+  data() {
+    return {
+      searchedName: ""
+    };
   },
   methods: {
-    ChangeInput(){
-      this.$emit('ChangeInput', this.searchedName);
+    ChangeInput() {
+      this.$emit("ChangeInput", this.searchedName);
     }
   }
-  
-})
+});
 </script>

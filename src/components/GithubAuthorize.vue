@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import router from "@/router";
-import store  from "@/store";
+import store from "@/store";
 import { useStore } from "vuex-simple";
-import AuthModule from '@/store/modules/auth';
+import AuthModule from "@/store/modules/auth";
 import Vue from "vue";
 import { mapActions, Store } from "vuex";
 import { authenticateGithubToken } from "../apis/authorize";
