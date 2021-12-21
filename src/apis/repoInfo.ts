@@ -58,3 +58,27 @@ export const getSonarqubeCodeSmell = (repoId: number | null) => {
     }
   });
 };
+
+export const getSonarqubeBug = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/sonarqube/bug/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};
+
+export const getCoverageSheet = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/sonarqube/coverage/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};
+
+export const getDuplicationSheet = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/sonarqube/duplications/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};

@@ -11,14 +11,14 @@
             </v-row>
             <v-row>
               <v-col>
-                <SonarSmells
+                <SonarSmellAndBug
                   :repoId="repoId"
                   attribute="Bugs"
                   callMeasureValue="bugs"
                 />
               </v-col>
               <v-col>
-                <SonarSmells
+                <SonarSheet
                   :repoId="repoId"
                   attribute="Vulnerabilities"
                   callMeasureValue="vulnerabilities"
@@ -27,14 +27,14 @@
             </v-row>
             <v-row>
               <v-col>
-                <SonarSmells
+                <SonarSmellAndBug
                   :repoId="repoId"
                   attribute="Code Smells"
                   callMeasureValue="code_smells"
                 />
               </v-col>
               <v-col>
-                <SonarSmells
+                <SonarSheet
                   :repoId="repoId"
                   attribute="Coverage"
                   callMeasureValue="coverage"
@@ -43,7 +43,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <SonarSmells
+                <SonarSheet
                   :repoId="repoId"
                   attribute="Duplications"
                   callMeasureValue="duplicated_lines_density"
@@ -59,7 +59,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import SonarSmells from "@/components/Sonar_Smells.vue";
+import SonarSmellAndBug from "@/components/Sonar_SmellsAndBug.vue";
+import SonarSheet from "@/components/Sonar_Sheet.vue";
 import { getSonarqubeInfo } from "@/apis/repoInfo";
 
 export default Vue.extend({
@@ -67,7 +68,8 @@ export default Vue.extend({
     repoId: Number,
   },
   components: {
-    SonarSmells,
+    SonarSmellAndBug,
+    SonarSheet,
   },
   data() {
     return {
@@ -85,7 +87,7 @@ export default Vue.extend({
       //this.measures = data["measures"];
       this.projectName = data["projectName"];
       //this.codeSmells = (await getSonarqubeCodeSmell(this.repoId)).data;
-    }
+    },
   },
 });
 </script>
