@@ -197,7 +197,11 @@ export default Vue.extend({
       isSonarqube: boolean,
       sonarqubeUrl: string,
       accountColonPassword: string,
-      projectKey: string
+      projectKey: string,
+      jobName: string,
+      isJenkins:boolean,
+      jenkinsUrl:string,
+      accountColonPasswordJenkins: string
     ) {
       const result = await addRepo(
         Number(this.projectId),
@@ -205,7 +209,11 @@ export default Vue.extend({
         isSonarqube,
         sonarqubeUrl,
         accountColonPassword,
-        projectKey
+        projectKey,
+        jobName,
+        isJenkins,
+        jenkinsUrl,
+        accountColonPasswordJenkins
       );
       this.msg = result["data"].message;
       this.dialog = false;

@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { getCodebase } from "@/apis/repoInfo.ts";
+import { getCodebase } from "@/apis/repoInfo";
 export default Vue.extend({
   props: {
     repoId: Number,

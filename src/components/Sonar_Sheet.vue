@@ -172,13 +172,13 @@ export default Vue.extend({
           mode: "single",
           callbacks: {
             label: function (tooltipItems: any, data: any) {
+              let duplicatedBlocks = 1;
+              duplicatedBlocks = data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index].r - 10 ;
               return [
                 "Lines of Code : " + tooltipItems.xLabel + " ",
                 "Duplicated Lines : " + tooltipItems.yLabel + " ",
                 "Duplicated Blocks : " +
-                  data.datasets[tooltipItems.datasetIndex].data[
-                    tooltipItems.index
-                  ].r +
+                  duplicatedBlocks +
                   " ",
               ];
             },
@@ -285,7 +285,7 @@ export default Vue.extend({
           this.chartData.datasets[0].data.push({
             x: parseFloat(this.duplications.components[i].measures[0].value),
             y: parseFloat(this.duplications.components[i].measures[1].value),
-            r: parseFloat(this.duplications.components[i].measures[2].value),
+            r: parseFloat(this.duplications.components[i].measures[2].value)+10,
           });
         }
       }

@@ -7,6 +7,7 @@
       <v-tab v-show="!isCompare">Contributor</v-tab>
       <v-tab>Code base</v-tab>
       <v-tab v-show="!isCompare && isHaveSonarqube">Sonarqube</v-tab>
+      <v-tab>Jenkins</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="tab-item">
@@ -21,6 +22,7 @@
       <v-tab-item><ContributeChart v-show="!isCompare" v-bind:repoId="repoId" /></v-tab-item>
       <v-tab-item><CodebaseChart v-bind:repoId="repoId" v-bind:compareRepoId="compareRepoId" /></v-tab-item>
       <v-tab-item><Sonarqube v-show="isHaveSonarqube" v-bind:repoId="repoId"/></v-tab-item>
+      <v-tab-item><Jenkins v-bind:repoId="repoId"/></v-tab-item>
       <v-tab-item></v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -34,6 +36,7 @@ import ContributeChart from "@/components/ContributeChart.vue";
 import IssuesTable from "@/components/IssuesTable.vue";
 import RepoInfoCompareForm from "@/components/RepoInfoCompareForm.vue";
 import Sonarqube from "@/components/Sonarqube.vue";
+import Jenkins from "@/components/JenkinsPrototype.vue";
 import { IsHaveSonarqube } from "@/apis/repoInfo";
 
 export default Vue.extend({
@@ -43,7 +46,8 @@ export default Vue.extend({
     ContributeChart,
     IssuesTable,
     RepoInfoCompareForm,
-    Sonarqube
+    Sonarqube,
+    Jenkins
   },
   data() {
     return {

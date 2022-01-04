@@ -16,7 +16,11 @@ export const addRepo: any = (
   isSonarqube: boolean,
   sonarqubeUrl: string,
   accountColonPassword: string,
-  projectKey: string
+  projectKey: string,
+  jobName: string,
+  isJenkins:boolean,
+  jenkinsUrl:string,
+  accountColonPasswordJenkins: string
 ) => {
   return axios.post(
     `${host}/repo`,
@@ -26,7 +30,11 @@ export const addRepo: any = (
       isSonarqube: isSonarqube,
       sonarqubeUrl: sonarqubeUrl,
       accountColonPassword: accountColonPassword,
-      projectKey: projectKey
+      projectKey: projectKey,
+      jobName: jobName,
+      isJenkins: isJenkins,
+      jenkinsUrl:jenkinsUrl,
+      accountColonPwJenkins:accountColonPasswordJenkins,
     },
     {
       headers: {

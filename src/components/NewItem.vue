@@ -29,7 +29,16 @@
                 color="primary"
               ></v-checkbox>
             </v-col>
+            <v-col>
+              <v-checkbox
+                flat
+                label="Jenkins"
+                v-model="isJenkins"
+                color="primary"
+              ></v-checkbox>
+            </v-col>
           </v-row>
+          <!-- Sonarqube -->
           <v-row>
             <v-col cols="12">
               <v-text-field
@@ -65,6 +74,42 @@
               ></v-text-field>
             </v-col>
           </v-row>
+          <!-- Jenkins -->
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                label="Jenkins URL"
+                v-model="jenkinsUrl"
+                v-show="isJenkins"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                label="Account"
+                v-model="accountJenkins"
+                v-show="isJenkins"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                label="Password"
+                v-model="passwordJenkins"
+                v-show="isJenkins"
+                type="password"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                label="Job Name"
+                v-model="jobName"
+                v-show="isJenkins"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card-text>
       <v-card-actions>
@@ -91,7 +136,12 @@ export default Vue.extend({
       pw: "",
       projectKey: "",
       dialog: false,
-      userAccounts: [] as any
+      userAccounts: [] as any,
+      jobName : "",
+      isJenkins: false,
+      passwordJenkins: "",
+      accountJenkins:"",
+      jenkinsUrl:""
     };
   },
   watch: {
@@ -100,18 +150,30 @@ export default Vue.extend({
       this.account = "";
       this.pw = "";
       this.projectKey = "";
+    },
+    isJenkins: function(){
+      this.jenkinsUrl = "";
+      this.accountJenkins = "";
+      this.passwordJenkins = "";
+      this.jobName = "";
     }
   },
   methods: {
     add() {
       const accountColonPassword = btoa(this.account + ":" + this.pw);
+      const accountColonPasswordJenkins = btoa(this.accountJenkins+":"+this.passwordJenkins);
       this.$emit(
         "add",
         this.url,
         this.isSonarqube,
         this.sonarqubeUrl,
         accountColonPassword,
-        this.projectKey
+        this.projectKey,
+        this.jobName,
+        this.isJenkins,
+        this.jenkinsUrl,
+        accountColonPasswordJenkins,
+        
       );
       this.dialog = false;
     },
@@ -122,6 +184,10 @@ export default Vue.extend({
       this.pw = "";
       this.projectKey = "";
       this.isSonarqube = false;
+      this.isJenkins = false;
+      this.jobName = "";
+      this.accountJenkins = "";
+      this.passwordJenkins = "";
     },
     isShow() {
       return !this.vCardTitle.includes("Project");
