@@ -61,3 +61,9 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 [PMS Reference](https://hackmd.io/@41KHVuJJS4qf99aDIZ_dbg/H1_J_uzKw/edit)
+
+
+### Link to Jenkins
+
+測試Github推送能不能觸發Jenkins自動建置
+
