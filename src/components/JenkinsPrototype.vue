@@ -44,6 +44,12 @@ export default Vue.extend({
       ],
       desserts: [
         {
+          name: "#6",
+          result: "FAILURE",
+          timestamp: "2022年01月06日 下午8:34",
+          duration: 24,
+        },
+        {
           name: "#5",
           result: "FAILURE",
           timestamp: "2021年12月27日 下午7:51",
