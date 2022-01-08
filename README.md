@@ -67,3 +67,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 測試Github推送能不能觸發Jenkins自動建置
 
+### 目前進度
+
+Jenkins的初始頁面已經建置完成，  
+輸入正確的Url, Account, Password & JobName就會顯示專案資訊。  
+(*Jenkins沒打勾的話進入RepoInfo頁面不會顯示Jenkins的tab item)
+

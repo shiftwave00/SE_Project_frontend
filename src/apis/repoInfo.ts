@@ -82,3 +82,28 @@ export const getDuplicationSheet = (repoId: number | null) => {
     }
   });
 };
+
+
+export const getJenkinsInfoAsync = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/jenkins/jobInformation/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};
+
+export const getJenkinsJobIssue = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/jenkins/jobIssue/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};
+
+export const IsHaveJenkins = (repoId: number | null) => {
+  return axios.get(`${host}/repoInfo/ishavejenkins/${repoId}`, {
+    headers: {
+      Authorization: `Bearer ${store.auth.getToken}`
+    }
+  });
+};

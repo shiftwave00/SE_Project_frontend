@@ -7,7 +7,7 @@
       <v-tab v-show="!isCompare">Contributor</v-tab>
       <v-tab>Code base</v-tab>
       <v-tab v-show="!isCompare && isHaveSonarqube">Sonarqube</v-tab>
-      <v-tab>Jenkins</v-tab>
+      <v-tab v-show="!isCompare && isHaveJenkins">Jenkins</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="tab-item">
@@ -22,7 +22,7 @@
       <v-tab-item><ContributeChart v-show="!isCompare" v-bind:repoId="repoId" /></v-tab-item>
       <v-tab-item><CodebaseChart v-bind:repoId="repoId" v-bind:compareRepoId="compareRepoId" /></v-tab-item>
       <v-tab-item><Sonarqube v-show="isHaveSonarqube" v-bind:repoId="repoId"/></v-tab-item>
-      <v-tab-item><Jenkins v-bind:repoId="repoId"/></v-tab-item>
+      <v-tab-item><Jenkins v-show="isHaveJenkins" v-bind:repoId="repoId"/></v-tab-item>
       <v-tab-item></v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -37,7 +37,7 @@ import IssuesTable from "@/components/IssuesTable.vue";
 import RepoInfoCompareForm from "@/components/RepoInfoCompareForm.vue";
 import Sonarqube from "@/components/Sonarqube.vue";
 import Jenkins from "@/components/JenkinsPrototype.vue";
-import { IsHaveSonarqube } from "@/apis/repoInfo";
+import { IsHaveSonarqube, IsHaveJenkins } from "@/apis/repoInfo";
 
 export default Vue.extend({
   components: {
@@ -55,12 +55,14 @@ export default Vue.extend({
       repoId: Number(this.$route.params.repoId),
       compareRepoId: null,
       isCompare: false,
-      isHaveSonarqube: false
+      isHaveSonarqube: false,
+      isHaveJenkins:false
     };
   },
   created() {
     (async () => {
       this.isHaveSonarqube = (await IsHaveSonarqube(this.repoId)).data;
+      this.isHaveJenkins = (await IsHaveJenkins(this.repoId)).data;
     })();
   },
   methods: {
